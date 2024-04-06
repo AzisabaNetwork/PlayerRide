@@ -1,0 +1,14 @@
+name: PlayerRide
+version: '${project.version}'
+main: azisaba.playerride.PlayerRide
+api-version: '1.15'
+
+commands:
+  ride:
+    permission: pr.command.ride
+    description: "Ride other player."
+    Usage: "/ride <target>"
+  eject:
+    permission: pr.command.eject
+    description: "Eject riding player."
+    Usage: "/eject"
