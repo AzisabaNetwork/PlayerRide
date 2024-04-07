@@ -1,5 +1,7 @@
 package azisaba.playerride.commands;
 
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -19,9 +21,10 @@ public class RideCommand implements CommandExecutor {
         Player targetPlayer = Bukkit.getPlayerExact(args[0]);
         if (targetPlayer == null) return false;
         if (ridePlayer.getWorld() != targetPlayer.getWorld()) return false;
+        if (!targetPlayer.getPassengers().isEmpty()) return false;
         if (ridePlayer.canSee(targetPlayer) && targetPlayer.canSee(ridePlayer) && ridePlayer.getLocation().distance(targetPlayer.getLocation()) <= 3) {
             targetPlayer.addPassenger(ridePlayer);
-
+            targetPlayer.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("§b§n/eject§fで上に乗っているプレイヤーを降ろします"));
         }
         return true;
     }
